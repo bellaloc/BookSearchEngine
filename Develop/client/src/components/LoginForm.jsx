@@ -2,6 +2,9 @@
 import { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
+import { useQuery } from '@apollo/client';
+import { GET_ME } from '../utils/queries'; // Adjust the path as needed
+
 import { loginUser } from '../utils/API';
 import Auth from '../utils/auth';
 
