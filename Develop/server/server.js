@@ -2,7 +2,6 @@ const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 const db = require('./config/connection');
-const routes = require('./routes');
 const { typeDefs, resolvers } = require('./schemas');
 
 const authMiddleware = require('./utils/auth');
@@ -31,8 +30,6 @@ app.use(express.json());
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 
-  app.use(routes);
-  
   // Serve React app for any route not handled by Apollo Server
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build/index.html'));
