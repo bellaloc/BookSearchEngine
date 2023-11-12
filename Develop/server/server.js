@@ -16,8 +16,8 @@ const server = new ApolloServer({
   resolvers,
   context: ({ req }) => {
     // Use authMiddleware here if needed
-    // const user = authMiddleware(req);
-    // return { user };
+    const user = authMiddleware(req);
+    return { user };
   },
 });
 
