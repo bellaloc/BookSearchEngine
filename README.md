@@ -17,7 +17,7 @@ Questions
 
 - Clone the repository:
 
-git clone https://github.com/your-username/apollo-book-search.git
+git clone https://github.com/BellaLoc/BookSearchEngine.git
 
 - Change into the project directory:
 

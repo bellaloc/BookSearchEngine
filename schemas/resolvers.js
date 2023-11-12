@@ -1,6 +1,6 @@
 // Your GraphQL resolvers go here
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Book } = require('../models'); // Update the path if needed
+const { User, Book } = require('../models'); 
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
