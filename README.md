@@ -40,6 +40,8 @@ MONGODB_URI=your_mongodb_connection_string
 - Start both the client and server:
 
 - cd client
+npm run build
+npm run dev
 npm start
 
 - Open a new terminal tab:
