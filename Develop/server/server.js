@@ -2,7 +2,7 @@ const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 const db = require('./config/connection');
-const { typeDefs, resolvers } = require('./schemas');
+const { typeDefs, resolvers } = require('../schemas');
 
 const authMiddleware = require('./utils/auth');
 
@@ -20,24 +20,27 @@ const server = new ApolloServer({
   },
 });
 
-// Apply Apollo Server middleware to Express app
-server.applyMiddleware({ app });
+// Use server.start() instead of await server.start()
+server.start().then(() => {
+  // Apply Apollo Server middleware to Express app
+  server.applyMiddleware({ app });
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+  app.use(express.json());
 
-// Serve React client in production
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/build')));
+  // Serve React client in production
+  if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/build')));
 
-  // Serve React app for any route not handled by Apollo Server
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build/index.html'));
-  });
-}
+    // Serve React app for any route not handled by Apollo Server
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, '../client/build/index.html'));
+    });
+  }
 
-db.once('open', () => {
-  app.listen(PORT, () => {
-    console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`);
+  db.once('open', () => {
+    app.listen(PORT, () => {
+      console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`);
+    });
   });
 });
