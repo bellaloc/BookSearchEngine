@@ -1,14 +1,22 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
+
+import { useQuery } from '@apollo/client';
+import { GET_ME } from '../utils/queries'; // Adjust the path as needed
 
 import Auth from '../utils/auth';
 
 const AppNavbar = () => {
   // set modal display state
   const [showModal, setShowModal] = useState(false);
+
+  // Function to close the modal
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   return (
     <>
@@ -20,13 +28,13 @@ const AppNavbar = () => {
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
             <Nav className='ml-auto d-flex'>
-              <Nav.Link as={Link} to='/'>
+              <Nav.Link as={NavLink} to='/' exact>
                 Search For Books
               </Nav.Link>
               {/* if user is logged in show saved books and logout */}
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link as={Link} to='/saved'>
+                  <Nav.Link as={NavLink} to='/saved' exact>
                     See Your Books
                   </Nav.Link>
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
@@ -42,7 +50,7 @@ const AppNavbar = () => {
       <Modal
         size='lg'
         show={showModal}
-        onHide={() => setShowModal(false)}
+        onHide={closeModal}
         aria-labelledby='signup-modal'>
         {/* tab container to do either signup or login component */}
         <Tab.Container defaultActiveKey='login'>
@@ -61,10 +69,10 @@ const AppNavbar = () => {
           <Modal.Body>
             <Tab.Content>
               <Tab.Pane eventKey='login'>
-                <LoginForm handleModalClose={() => setShowModal(false)} />
+                <LoginForm handleModalClose={closeModal} />
               </Tab.Pane>
               <Tab.Pane eventKey='signup'>
-                <SignUpForm handleModalClose={() => setShowModal(false)} />
+                <SignUpForm handleModalClose={closeModal} />
               </Tab.Pane>
             </Tab.Content>
           </Modal.Body>
