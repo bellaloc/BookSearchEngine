@@ -5,9 +5,8 @@
 The Apollo Book Search Engine is a web application that empowers users to search for books using the Google Books API. Users can create accounts, search for books, and save their favorite books to their profiles. This project has been refactored to use Apollo Client for the frontend and Apollo Server for the backend, utilizing GraphQL for more efficient data fetching and modification.
 
 # Heroku
-this app is deployed at Heroku: ⬢ morning-badlands-29860
-https://morning-badlands-29860-77f7c2b3a124.herokuapp.com/ 
-https://git.heroku.com/morning-badlands-29860.git
+this app is deployed at Heroku:
+https://git.heroku.com/murmuring-retreat-88718.git
 
 # Table of Contents
 
