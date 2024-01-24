@@ -6,7 +6,7 @@ The Apollo Book Search Engine is a web application that empowers users to search
 
 # Heroku
 this app is deployed at Heroku:
-https://git.heroku.com/murmuring-retreat-88718.git
+(https://murmuring-retreat-88718-1ebbef69cc1f.herokuapp.com/)
 
 # Table of Contents
 
